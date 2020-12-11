@@ -57,13 +57,66 @@ def listarMarcaNome():
     for nome_marca in nome_marcas:
         marcas.append(nome_marca[0])
     return marcas
+def inserirEssencia(nome_essencia):
+    sql="insert into Essencias (nome) values('{0}')".format(nome_essencia)
+    cursor=banco.cursor()
+    cursor.execute(sql)
+    banco.commit()
+    cursor.close()
+'''
+Essa função atualiza uma marca no banco de dados, recebendo como parâmetros
+o id e o nome. O id é necessário para ser usado na instrução update
+'''
+def atualizarEssencia(id,nome):
+    sql="update Essencias set nome='{0}' where id={1}".format(nome,id)
+    cursor=banco.cursor()
+    cursor.execute(sql)
+    banco.commit()
+    cursor.close()
+'''
+Essa função localiza uma marca pelo seu nome, partindo do pressuposto que não
+existirão marcas com nomes iguais
+'''
+def localizarEssenciaPorNome(nome):
+    sql="select * from Essencias where nome='{0}'".format(nome)
+    cursor=banco.cursor()
+    cursor.execute(sql)
+    essencia=cursor.fetchone()
+    cursor.close()
+    return essencia
+'''
+Essa função retorna uma lista Python com todas as marcas cadastradas no banco de dados,
+trazendo o id o nome da marca
+'''
+def listarEssencia():
+    sql="select * from Essencias"
+    cursor=banco.cursor()
+    cursor.execute(sql)
+    essencias=cursor.fetchall()
+    cursor.close()
+    return essencias
+'''
+Essa função retorna uma lista Python contendo o nome de todas marcas,
+ordenadas pelo nome
+'''
+def listarEssenciaNome():
+    sql="select nome from Essencias order by nome"
+    cursor=banco.cursor()
+    cursor.execute(sql)
+    nome_essencias=cursor.fetchall()
+    cursor.close()
+    essencias=[]
+    for nome_essencia in nome_essencias:
+        essencias.append(nome_essencia[0])
+    return essencias
+
 def inserirVolume(nome_volume):
     sql="insert into Volumes (nome) values('{0}')".format(nome_volume)
     cursor=banco.cursor()
     cursor.execute(sql)
     banco.commit()
     cursor.close()
-def atualizarVolume(id,nome):
+def atualizarVolumes(id,nome):
     sql="update Volumes set nome='{0}' where id={1}".format(nome,id)
     cursor=banco.cursor()
     cursor.execute(sql)
@@ -93,13 +146,26 @@ def localizarVolumePorNome(nome):
     volume=cursor.fetchone()
     cursor.close()
     return volume
+
+def inserirFixacao(nome_volume):
+    sql="insert into Fixacoes (nome) values('{0}')".format(nome_volume)
+    cursor=banco.cursor()
+    cursor.execute(sql)
+    banco.commit()
+    cursor.close()
+def atualizarFixação(id,nome):
+    sql="update Fixacoes set nome='{0}' where id={1}".format(nome,id)
+    cursor=banco.cursor()
+    cursor.execute(sql)
+    banco.commit()
+    cursor.close()
 def listarFixacao():
     sql="select * from Fixacoes"
     cursor=banco.cursor()
     cursor.execute(sql)
     fixacoes=cursor.fetchall()
     cursor.close()
-    print(len(fixacoes))
+    #print(len(fixacoes))
     return fixacoes
 def localizarFixacaoPorNome(nome):
     sql="select * from Fixacoes where nome='{0}'".format(nome)
@@ -115,8 +181,8 @@ def listarFixacaoNome():
     nome_fixacoes=cursor.fetchall()
     cursor.close()
     fixacoes=[]
-    for fixacao in nome_fixacoes:
-        fixacoes.append(fixacao[0])
+    for nome_fixacao in nome_fixacoes:
+        fixacoes.append(nome_fixacao[0])
     return fixacoes
 
 '''

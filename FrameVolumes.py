@@ -2,23 +2,46 @@
 
 import wx
 import guiperfumes
+import db
 
 # Implementing FrameVolumes
 class FrameVolumes(guiperfumes.FrameVolumes):
 	def __init__( self, parent ):
 		guiperfumes.FrameVolumes.__init__( self, parent )
+		self.atualizarGrid()
 
 	# Handlers for FrameVolumes events.
 	def fecharFrame( self, event ):
+		self.Show(False)
 		# TODO: Implement fecharFrame
-		pass
+		#pass
 
 	def adicionarVolume( self, event ):
+		nome=self.txtNome.GetValue()
+		db.inserirVolume(nome)
+		wx.MessageBox(message="Volume Inserido com Sucesso", caption="SisPerfumes", style=wx.OK, parent=self)
+		self.atualizarGrid()
+
+
 		# TODO: Implement adicionarVolume
-		pass
+		#pass
 
 	def atualizarVolume( self, event ):
-		# TODO: Implement atualizarVolume
-		pass
+		nome_volume=self.gridVolumes.GetCellValue(event.GetRow(),event.GetCol())
+		if (nome_volume):
+			id_volume = int(self.gridVolumes.GetCellValue(event.GetRow(),0))  # Pegue na linha editada, o conteúdo da primeira coluna
+			db.atualizarVolumes(id_volume, nome_volume)  # Chame a função para atualizar uma marca
+			wx.MessageBox(message="Volume Atualizado com Sucesso", caption="SysPerfumes", style=wx.OK, parent=self)
 
+		# TODO: Implement atualizarVolume
+		#pass
+	def atualizarGrid(self):
+		if (self.gridVolumes.GetNumberRows()>0):
+			self.gridVolumes.DeleteRows(0,self.gridVolumes.GetNumberRows()) #Limpa a tabela
+		volumes=db.listarVolume() #Chama a função listar marcas, retornando a lista de marcas existentes
+		for volume in volumes:
+			self.gridVolumes.AppendRows(1)#Adiciona uma linha em branco
+			self.gridVolumes.SetCellValue(self.gridVolumes.GetNumberRows()-1,0,str(volume[0])) #adicione o id da marca
+			self.gridVolumes.SetCellValue(self.gridVolumes.GetNumberRows() - 1, 1, volume[1]) #adiciona o nome da marca
+			self.gridVolumes.SetReadOnly(self.gridVolumes.GetNumberRows() - 1, 0, True) #Informa que a coluna 0(ID) é somente leitura
 

@@ -104,6 +104,186 @@ class FrameMarca ( wx.Frame ):
 
 
 ###########################################################################
+## Class FrameEssencia
+###########################################################################
+
+class FrameEssencia ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Essências", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer14 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer15 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.m_staticText4 = wx.StaticText( self, wx.ID_ANY, u"Descrição:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText4.Wrap( -1 )
+
+		bSizer15.Add( self.m_staticText4, 0, wx.ALL, 5 )
+
+		self.txtNome = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer15.Add( self.txtNome, 1, wx.ALL, 5 )
+
+		self.btnAdicionar = wx.Button( self, wx.ID_ANY, u"Adicionar", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer15.Add( self.btnAdicionar, 0, wx.ALL, 5 )
+
+
+		bSizer14.Add( bSizer15, 0, wx.EXPAND, 5 )
+
+		bSizer17 = wx.BoxSizer( wx.VERTICAL )
+
+		self.gridEssências = wx.grid.Grid( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+
+		# Grid
+		self.gridEssências.CreateGrid( 0, 2 )
+		self.gridEssências.EnableEditing( True )
+		self.gridEssências.EnableGridLines( True )
+		self.gridEssências.EnableDragGridSize( False )
+		self.gridEssências.SetMargins( 0, 0 )
+
+		# Columns
+		self.gridEssências.SetColSize( 0, 30 )
+		self.gridEssências.SetColSize( 1, 300 )
+		self.gridEssências.EnableDragColMove( False )
+		self.gridEssências.EnableDragColSize( True )
+		self.gridEssências.SetColLabelSize( 30 )
+		self.gridEssências.SetColLabelValue( 0, u"ID" )
+		self.gridEssências.SetColLabelValue( 1, u"Nome" )
+		self.gridEssências.SetColLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+
+		# Rows
+		self.gridEssências.EnableDragRowSize( True )
+		self.gridEssências.SetRowLabelSize( 80 )
+		self.gridEssências.SetRowLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+
+		# Label Appearance
+
+		# Cell Defaults
+		self.gridEssências.SetDefaultCellAlignment( wx.ALIGN_LEFT, wx.ALIGN_TOP )
+		bSizer17.Add( self.gridEssências, 1, wx.ALL|wx.EXPAND, 5 )
+
+
+		bSizer14.Add( bSizer17, 1, wx.EXPAND, 5 )
+
+
+		self.SetSizer( bSizer14 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.Bind( wx.EVT_CLOSE, self.fecharFrame )
+		self.btnAdicionar.Bind( wx.EVT_BUTTON, self.adicionarEssencia )
+		self.gridEssências.Bind( wx.grid.EVT_GRID_CELL_CHANGED, self.atualizarEssência )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def fecharFrame( self, event ):
+		event.Skip()
+
+	def adicionarEssencia( self, event ):
+		event.Skip()
+
+	def atualizarEssência( self, event ):
+		event.Skip()
+
+
+###########################################################################
+## Class FrameFixacao
+###########################################################################
+
+class FrameFixacao ( wx.Frame ):
+
+	def __init__( self, parent ):
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Fixações", pos = wx.DefaultPosition, size = wx.Size( 500,300 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+
+		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
+
+		bSizer10 = wx.BoxSizer( wx.VERTICAL )
+
+		bSizer11 = wx.BoxSizer( wx.HORIZONTAL )
+
+		self.m_staticText3 = wx.StaticText( self, wx.ID_ANY, u"Descrição:", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_staticText3.Wrap( -1 )
+
+		bSizer11.Add( self.m_staticText3, 0, wx.ALL, 5 )
+
+		self.txtNome = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer11.Add( self.txtNome, 1, wx.ALL, 5 )
+
+		self.btnAdicionar = wx.Button( self, wx.ID_ANY, u"Adicionar", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer11.Add( self.btnAdicionar, 0, wx.ALL, 5 )
+
+
+		bSizer10.Add( bSizer11, 0, wx.EXPAND, 5 )
+
+		bSizer13 = wx.BoxSizer( wx.VERTICAL )
+
+		self.gridFixações = wx.grid.Grid( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+
+		# Grid
+		self.gridFixações.CreateGrid( 0, 2 )
+		self.gridFixações.EnableEditing( True )
+		self.gridFixações.EnableGridLines( True )
+		self.gridFixações.EnableDragGridSize( False )
+		self.gridFixações.SetMargins( 0, 0 )
+
+		# Columns
+		self.gridFixações.SetColSize( 0, 30 )
+		self.gridFixações.SetColSize( 1, 300 )
+		self.gridFixações.EnableDragColMove( False )
+		self.gridFixações.EnableDragColSize( True )
+		self.gridFixações.SetColLabelSize( 30 )
+		self.gridFixações.SetColLabelValue( 0, u"ID" )
+		self.gridFixações.SetColLabelValue( 1, u"Nome" )
+		self.gridFixações.SetColLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+
+		# Rows
+		self.gridFixações.EnableDragRowSize( True )
+		self.gridFixações.SetRowLabelSize( 80 )
+		self.gridFixações.SetRowLabelAlignment( wx.ALIGN_CENTER, wx.ALIGN_CENTER )
+
+		# Label Appearance
+
+		# Cell Defaults
+		self.gridFixações.SetDefaultCellAlignment( wx.ALIGN_LEFT, wx.ALIGN_TOP )
+		bSizer13.Add( self.gridFixações, 1, wx.ALL|wx.EXPAND, 5 )
+
+
+		bSizer10.Add( bSizer13, 1, wx.EXPAND, 5 )
+
+
+		self.SetSizer( bSizer10 )
+		self.Layout()
+
+		self.Centre( wx.BOTH )
+
+		# Connect Events
+		self.Bind( wx.EVT_CLOSE, self.fecharFrame )
+		self.btnAdicionar.Bind( wx.EVT_BUTTON, self.adicionarFixacao )
+		self.gridFixações.Bind( wx.grid.EVT_GRID_CELL_CHANGED, self.atualizarFixação )
+
+	def __del__( self ):
+		pass
+
+
+	# Virtual event handlers, overide them in your derived class
+	def fecharFrame( self, event ):
+		event.Skip()
+
+	def adicionarFixacao( self, event ):
+		event.Skip()
+
+	def atualizarFixação( self, event ):
+		event.Skip()
+
+
+###########################################################################
 ## Class FrameVolumes
 ###########################################################################
 
@@ -248,9 +428,11 @@ class FramePrincipal ( wx.Frame ):
 		# Connect Events
 		self.Bind( wx.EVT_CLOSE, self.fecharFramePrincipal )
 		self.Bind( wx.EVT_MENU, self.abrirMarca, id = self.menuMarcas.GetId() )
-		self.Bind( wx.EVT_MENU, self.abrirFixacoes, id = self.menuFixacoes.GetId() )
+		self.Bind( wx.EVT_MENU, self.abrirEssencia, id = self.menuEssencias.GetId() )
+		self.Bind( wx.EVT_MENU, self.abrirFixacao, id = self.menuFixacoes.GetId() )
 		self.Bind( wx.EVT_MENU, self.abrirVolumes, id = self.menuVolume.GetId() )
 		self.Bind( wx.EVT_MENU, self.abrirPerfume, id = self.menuPerfumes.GetId() )
+		self.Bind( wx.EVT_MENU, self.abrirEssencia, id = self.menuPerfumeEssencia.GetId() )
 		self.Bind( wx.EVT_MENU, self.fecharApp, id = self.menuSair.GetId() )
 
 	def __del__( self ):
@@ -264,7 +446,10 @@ class FramePrincipal ( wx.Frame ):
 	def abrirMarca( self, event ):
 		event.Skip()
 
-	def abrirFixacoes( self, event ):
+	def abrirEssencia( self, event ):
+		event.Skip()
+
+	def abrirFixacao( self, event ):
 		event.Skip()
 
 	def abrirVolumes( self, event ):
@@ -272,6 +457,7 @@ class FramePrincipal ( wx.Frame ):
 
 	def abrirPerfume( self, event ):
 		event.Skip()
+
 
 	def fecharApp( self, event ):
 		event.Skip()
